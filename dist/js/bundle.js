@@ -91,45 +91,45 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cMachine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _cacao__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _water__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _coffee__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _milk__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+/* harmony import */ var _sugar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
 
-var Packard = new _cMachine__WEBPACK_IMPORTED_MODULE_0__["default"]('Packard');
+
+
+
+
+
+var cacao = new _cacao__WEBPACK_IMPORTED_MODULE_1__["Cacao"](), coffee = new _coffee__WEBPACK_IMPORTED_MODULE_3__["Coffee"](), sugar = new _sugar__WEBPACK_IMPORTED_MODULE_5__["Sugar"](), water = new _water__WEBPACK_IMPORTED_MODULE_2__["Water"](), milk = new _milk__WEBPACK_IMPORTED_MODULE_4__["Milk"]();
+var Packard = new _cMachine__WEBPACK_IMPORTED_MODULE_0__["default"]('Packard', cacao, coffee, sugar, water, milk);
 var addResource = document.querySelector('.buttons_add');
 var createOrd = document.querySelector('.buttons_create');
 var output = document.getElementById('output');
+var Order;
+(function (Order) {
+    Order[Order["Nescafe"] = 1] = "Nescafe";
+    Order[Order["Chocolate"] = 2] = "Chocolate";
+    Order[Order["Milk chocolate"] = 3] = "Milk chocolate";
+    Order[Order["3 in 1"] = 4] = "3 in 1";
+})(Order || (Order = {}));
 addResource.addEventListener('click', function (event) {
-    var target = event.target;
-    if (target === addResource.children[0]) {
-        Packard.addCoffee(100);
-    }
-    else if (target === addResource.children[1]) {
-        Packard.addWater(100);
-    }
-    else if (target === addResource.children[2]) {
-        Packard.addMilk(100);
-    }
-    else if (target === addResource.children[3]) {
-        Packard.addCacao(100);
-    }
-    else if (target === addResource.children[4]) {
-        Packard.addSugar(100);
+    switch (event.target) {
+        case addResource.children[0]: Packard.addResource(100, Packard.coffee);
+        case addResource.children[1]: Packard.addResource(100, Packard.water);
+        case addResource.children[2]: Packard.addResource(100, Packard.milk);
+        case addResource.children[3]: Packard.addResource(100, Packard.cacao);
+        case addResource.children[4]: Packard.addResource(100, Packard.sugar);
     }
 });
 createOrd.addEventListener('click', function (event) {
-    var target = event.target;
-    var order;
-    if (target === createOrd.children[0]) {
-        order = Packard.createOrder(1);
+    switch (event.target) {
+        case createOrd.children[0]: output.innerHTML = Packard.createOrder(Order.Nescafe);
+        case createOrd.children[1]: output.innerHTML = Packard.createOrder(Order.Chocolate);
+        case createOrd.children[2]: output.innerHTML = Packard.createOrder(Order["Milk chocolate"]);
+        case createOrd.children[3]: output.innerHTML = Packard.createOrder(Order["3 in 1"]);
     }
-    else if (target === createOrd.children[1]) {
-        order = Packard.createOrder(2);
-    }
-    else if (target === createOrd.children[2]) {
-        order = Packard.createOrder(3);
-    }
-    else if (target == createOrd.children[3]) {
-        order = Packard.createOrder(4);
-    }
-    output.innerHTML = order;
 });
 
 
@@ -139,131 +139,80 @@ createOrd.addEventListener('click', function (event) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _cacao__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _water__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _coffee__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
-/* harmony import */ var _milk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
-/* harmony import */ var _sugar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-
-
-
-
-
 var CMachine = /** @class */ (function () {
-    function CMachine(name) {
-        this.cacao = new _cacao__WEBPACK_IMPORTED_MODULE_0__["Cacao"];
-        this.water = new _water__WEBPACK_IMPORTED_MODULE_1__["Water"]();
-        this.coffee = new _coffee__WEBPACK_IMPORTED_MODULE_2__["Coffee"]();
-        this.milk = new _milk__WEBPACK_IMPORTED_MODULE_3__["Milk"]();
-        this.sugar = new _sugar__WEBPACK_IMPORTED_MODULE_4__["Sugar"]();
+    function CMachine(name, cacao, coffee, sugar, water, milk) {
+        this.cacao = cacao;
+        this.water = water;
+        this.coffee = coffee;
+        this.milk = milk;
+        this.sugar = sugar;
     }
-    CMachine.prototype.addCacao = function (quant) {
-        this.cacao.countCacao += quant;
-        console.log(4);
-    };
-    CMachine.prototype.addWater = function (quant) {
-        this.water.countWater += quant;
-        console.log(2);
-    };
-    CMachine.prototype.addCoffee = function (quant) {
-        this.coffee.countCoffee += quant;
-        console.log(1);
-    };
-    CMachine.prototype.addMilk = function (quant) {
-        this.milk.countMilk += quant;
-        console.log(3);
-    };
-    CMachine.prototype.addSugar = function (quant) {
-        this.sugar.countSugar += quant;
-        console.log(5);
-    };
-    CMachine.prototype.createOrder = function (num) {
-        if (num === 1) {
-            if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100) {
-                this.coffee.countCoffee -= 30;
-                this.water.countWater -= 100;
-                return 'Заберите стаканчик с Nescafe';
-            }
-            else {
-                if (this.coffee.countCoffee < 30) {
-                    return 'Not enough coffee';
-                }
-                else if (this.water.countWater < 100) {
-                    return 'Not enough water';
-                }
-            }
+    CMachine.prototype.addResource = function (quant, resource) {
+        switch (resource) {
+            case this.coffee: this.coffee.countCoffee += quant;
+            case this.cacao: this.cacao.countCacao += quant;
+            case this.water: this.water.countWater += quant;
+            case this.milk: this.milk.countMilk += quant;
+            case this.sugar: this.sugar.countSugar += quant;
         }
-        else if (num === 2) {
-            if (this.cacao.countCacao >= 20 && this.water.countWater >= 100 && this.sugar.countSugar >= 10) {
-                this.cacao.countCacao -= 20;
-                this.water.countWater -= 100;
-                this.sugar.countSugar -= 10;
-                return 'Заберите стаканчик с Chocolate';
-            }
-            else {
-                if (this.cacao.countCacao < 20) {
-                    return 'Not enough cacao';
+    };
+    CMachine.prototype.isResource = function (water, coffee, cacao, sugar, milk) {
+        var notRes = [];
+        this.water.countWater < water && notRes.push('Water');
+        this.coffee.countCoffee < coffee && notRes.push('Coffee');
+        this.water.countSugar < sugar && notRes.push('Sugar');
+        this.water.countMilk < milk && notRes.push('Milk');
+        this.water.countCacao < cacao && notRes.push('Cacao');
+        return "Not enough: " + notRes.join(', ');
+    };
+    CMachine.prototype.createOrder = function (numOfOrd) {
+        switch (numOfOrd) {
+            case 1:
+                if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100) {
+                    this.coffee.countCoffee -= 30;
+                    this.water.countWater -= 100;
+                    return 'Заберите стаканчик с Nescafe';
                 }
-                else if (this.water.countWater < 100) {
-                    return 'Not enough water';
+                else {
+                    return this.isResource(100, 30);
                 }
-                else if (this.sugar.countSugar < 10) {
-                    return 'Not enough sugar';
+                ;
+            case 2:
+                if (this.cacao.countCacao >= 20 && this.water.countWater >= 100 && this.sugar.countSugar >= 10) {
+                    this.cacao.countCacao -= 20;
+                    this.water.countWater -= 100;
+                    this.sugar.countSugar -= 10;
+                    return 'Заберите стаканчик с Chocolate';
                 }
-            }
-        }
-        else if (num === 3) {
-            if (this.cacao.countCacao >= 30 && this.water.countWater >= 100
-                && this.sugar.countSugar >= 10 && this.milk.countMilk >= 20) {
-                this.cacao.countCacao -= 30;
-                this.water.countWater -= 100;
-                this.sugar.countSugar -= 10;
-                this.milk.countMilk -= 20;
-                return 'Заберите стаканчик с Milk chocolate';
-            }
-            else {
-                if (this.cacao.countCacao < 30) {
-                    return 'Not enough cacao';
+                else {
+                    return this.isResource(100, 0, 20, 10);
                 }
-                else if (this.water.countWater < 100) {
-                    return 'Not enough water';
+            case 3:
+                if (this.cacao.countCacao >= 30 && this.water.countWater >= 100
+                    && this.sugar.countSugar >= 10 && this.milk.countMilk >= 20) {
+                    this.cacao.countCacao -= 30;
+                    this.water.countWater -= 100;
+                    this.sugar.countSugar -= 10;
+                    this.milk.countMilk -= 20;
+                    return 'Заберите стаканчик с Milk chocolate';
                 }
-                else if (this.sugar.countSugar < 10) {
-                    return 'Not enough sugar';
+                else {
+                    return this.isResource(100, 0, 20, 10, 20);
                 }
-                else if (this.milk.countMilk < 20) {
-                    return 'Not enough sugar';
+            case 4:
+                if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100
+                    && this.cacao.countCacao >= 20 && this.sugar.countSugar >= 10
+                    && this.milk.countMilk >= 20) {
+                    this.coffee.countCoffee -= 30;
+                    this.water.countWater -= 100;
+                    this.cacao.countCacao -= 20;
+                    this.sugar.countSugar -= 10;
+                    this.milk.countMilk -= 20;
+                    return 'Заберите стаканчик с 3 in 1';
                 }
-            }
-        }
-        else if (num === 4) {
-            if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100
-                && this.cacao.countCacao >= 20 && this.sugar.countSugar >= 10
-                && this.milk.countMilk >= 20) {
-                this.coffee.countCoffee -= 30;
-                this.water.countWater -= 100;
-                this.cacao.countCacao -= 20;
-                this.sugar.countSugar -= 10;
-                this.milk.countMilk -= 20;
-                return 'Заберите стаканчик с 3 in 1';
-            }
-            else {
-                if (this.coffee.countCoffee < 30) {
-                    return 'Not enough coffee';
+                else {
+                    return this.isResource(100, 30, 20, 10, 20);
                 }
-                else if (this.water.countWater < 100) {
-                    return 'Not enough water';
-                }
-                else if (this.cacao.countCacao < 20) {
-                    return 'Not enough cacao';
-                }
-                else if (this.sugar.countSugar < 10) {
-                    return 'Not enough sugar';
-                }
-                else if (this.milk.countMilk < 20) {
-                    return 'Not enough milk';
-                }
-            }
         }
     };
     return CMachine;

@@ -1,36 +1,43 @@
 import CMachine from './cMachine';
+import {Cacao} from './cacao';
+import {Water} from './water';
+import {Coffee} from './coffee';
+import {Milk} from './milk';
+import {Sugar} from './sugar';
 
-const Packard: CMachine = new CMachine('Packard');
+const cacao: Cacao = new Cacao(), 
+    coffee: Coffee = new Coffee(), 
+    sugar: Sugar = new Sugar(), 
+    water: Water = new Water(), 
+    milk: Milk = new Milk();
+
+const Packard: CMachine = new CMachine('Packard', cacao, coffee, sugar, water, milk);
 const addResource: HTMLDivElement = document.querySelector('.buttons_add');
 const createOrd: HTMLDivElement = document.querySelector('.buttons_create');
 const output: any = document.getElementById('output');
 
+enum Order {
+    'Nescafe' = 1,
+    'Chocolate' = 2,
+    'Milk chocolate' = 3,
+    '3 in 1' = 4
+}
+
 addResource.addEventListener('click', (event) => {
-    let target = event.target;
-    if (target === addResource.children[0]) {
-        Packard.addCoffee(100)
-    } else if (target === addResource.children[1]) {
-        Packard.addWater(100)
-    } else if (target === addResource.children[2]) {
-        Packard.addMilk(100)
-    } else if (target === addResource.children[3]) {
-        Packard.addCacao(100)
-    } else if (target === addResource.children[4]) {
-        Packard.addSugar(100)
+    switch (event.target) {
+        case addResource.children[0]: Packard.addResource(100, Packard.coffee);
+        case addResource.children[1]: Packard.addResource(100, Packard.water);
+        case addResource.children[2]: Packard.addResource(100, Packard.milk);
+        case addResource.children[3]: Packard.addResource(100, Packard.cacao);
+        case addResource.children[4]: Packard.addResource(100, Packard.sugar);
     }
 });
 
 createOrd.addEventListener('click', (event) => {
-    let target = event.target;
-    let order: string;
-    if (target === createOrd.children[0]) {
-        order = Packard.createOrder(1);
-    } else if (target === createOrd.children[1]) {
-        order = Packard.createOrder(2)
-    } else if (target === createOrd.children[2]) {
-        order = Packard.createOrder(3)
-    } else if (target == createOrd.children[3]) {
-        order = Packard.createOrder(4)
+    switch (event.target) {
+        case createOrd.children[0]: output.innerHTML = Packard.createOrder(Order.Nescafe);
+        case createOrd.children[1]: output.innerHTML = Packard.createOrder(Order.Chocolate);
+        case createOrd.children[2]: output.innerHTML = Packard.createOrder(Order["Milk chocolate"]);
+        case createOrd.children[3]: output.innerHTML = Packard.createOrder(Order["3 in 1"]);
     }
-    output.innerHTML = order;
 });
