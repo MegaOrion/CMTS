@@ -25,19 +25,19 @@ enum Order {
 
 addResource.addEventListener('click', (event) => {
     switch (event.target) {
-        case addResource.children[0]: Packard.addResource(100, Packard.coffee);
-        case addResource.children[1]: Packard.addResource(100, Packard.water);
-        case addResource.children[2]: Packard.addResource(100, Packard.milk);
-        case addResource.children[3]: Packard.addResource(100, Packard.cacao);
-        case addResource.children[4]: Packard.addResource(100, Packard.sugar);
+        case addResource.children[0]: Packard.addResource(100, Packard.coffee); break
+        case addResource.children[1]: Packard.addResource(100, Packard.water); break
+        case addResource.children[2]: Packard.addResource(100, Packard.milk); break
+        case addResource.children[3]: Packard.addResource(100, Packard.cacao); break
+        case addResource.children[4]: Packard.addResource(100, Packard.sugar); break
     }
 });
 
 createOrd.addEventListener('click', (event) => {
     switch (event.target) {
-        case createOrd.children[0]: output.innerHTML = Packard.createOrder(Order.Nescafe);
-        case createOrd.children[1]: output.innerHTML = Packard.createOrder(Order.Chocolate);
-        case createOrd.children[2]: output.innerHTML = Packard.createOrder(Order["Milk chocolate"]);
-        case createOrd.children[3]: output.innerHTML = Packard.createOrder(Order["3 in 1"]);
+        case createOrd.children[0]: output.innerHTML = Packard.createOrder(Order.Nescafe); break
+        case createOrd.children[1]: output.innerHTML = Packard.createOrder(Order.Chocolate); break
+        case createOrd.children[2]: output.innerHTML = Packard.createOrder(Order["Milk chocolate"]); break
+        case createOrd.children[3]: output.innerHTML = Packard.createOrder(Order["3 in 1"]); break
     }
 });

@@ -116,19 +116,37 @@ var Order;
 })(Order || (Order = {}));
 addResource.addEventListener('click', function (event) {
     switch (event.target) {
-        case addResource.children[0]: Packard.addResource(100, Packard.coffee);
-        case addResource.children[1]: Packard.addResource(100, Packard.water);
-        case addResource.children[2]: Packard.addResource(100, Packard.milk);
-        case addResource.children[3]: Packard.addResource(100, Packard.cacao);
-        case addResource.children[4]: Packard.addResource(100, Packard.sugar);
+        case addResource.children[0]:
+            Packard.addResource(100, Packard.coffee);
+            break;
+        case addResource.children[1]:
+            Packard.addResource(100, Packard.water);
+            break;
+        case addResource.children[2]:
+            Packard.addResource(100, Packard.milk);
+            break;
+        case addResource.children[3]:
+            Packard.addResource(100, Packard.cacao);
+            break;
+        case addResource.children[4]:
+            Packard.addResource(100, Packard.sugar);
+            break;
     }
 });
 createOrd.addEventListener('click', function (event) {
     switch (event.target) {
-        case createOrd.children[0]: output.innerHTML = Packard.createOrder(Order.Nescafe);
-        case createOrd.children[1]: output.innerHTML = Packard.createOrder(Order.Chocolate);
-        case createOrd.children[2]: output.innerHTML = Packard.createOrder(Order["Milk chocolate"]);
-        case createOrd.children[3]: output.innerHTML = Packard.createOrder(Order["3 in 1"]);
+        case createOrd.children[0]:
+            output.innerHTML = Packard.createOrder(Order.Nescafe);
+            break;
+        case createOrd.children[1]:
+            output.innerHTML = Packard.createOrder(Order.Chocolate);
+            break;
+        case createOrd.children[2]:
+            output.innerHTML = Packard.createOrder(Order["Milk chocolate"]);
+            break;
+        case createOrd.children[3]:
+            output.innerHTML = Packard.createOrder(Order["3 in 1"]);
+            break;
     }
 });
 
@@ -149,11 +167,21 @@ var CMachine = /** @class */ (function () {
     }
     CMachine.prototype.addResource = function (quant, resource) {
         switch (resource) {
-            case this.coffee: this.coffee.countCoffee += quant;
-            case this.cacao: this.cacao.countCacao += quant;
-            case this.water: this.water.countWater += quant;
-            case this.milk: this.milk.countMilk += quant;
-            case this.sugar: this.sugar.countSugar += quant;
+            case this.coffee:
+                this.coffee.countCoffee += quant;
+                break;
+            case this.cacao:
+                this.cacao.countCacao += quant;
+                break;
+            case this.water:
+                this.water.countWater += quant;
+                break;
+            case this.milk:
+                this.milk.countMilk += quant;
+                break;
+            case this.sugar:
+                this.sugar.countSugar += quant;
+                break;
         }
     };
     CMachine.prototype.isResource = function (water, coffee, cacao, sugar, milk) {
@@ -177,6 +205,7 @@ var CMachine = /** @class */ (function () {
                     return this.isResource(100, 30);
                 }
                 ;
+                break;
             case 2:
                 if (this.cacao.countCacao >= 20 && this.water.countWater >= 100 && this.sugar.countSugar >= 10) {
                     this.cacao.countCacao -= 20;
@@ -187,6 +216,8 @@ var CMachine = /** @class */ (function () {
                 else {
                     return this.isResource(100, 0, 20, 10);
                 }
+                ;
+                break;
             case 3:
                 if (this.cacao.countCacao >= 30 && this.water.countWater >= 100
                     && this.sugar.countSugar >= 10 && this.milk.countMilk >= 20) {
@@ -199,6 +230,8 @@ var CMachine = /** @class */ (function () {
                 else {
                     return this.isResource(100, 0, 20, 10, 20);
                 }
+                ;
+                break;
             case 4:
                 if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100
                     && this.cacao.countCacao >= 20 && this.sugar.countSugar >= 10
@@ -213,6 +246,8 @@ var CMachine = /** @class */ (function () {
                 else {
                     return this.isResource(100, 30, 20, 10, 20);
                 }
+                ;
+                break;
         }
     };
     return CMachine;

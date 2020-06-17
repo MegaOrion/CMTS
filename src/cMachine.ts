@@ -14,11 +14,11 @@ class CMachine {
 
     addResource(quant: number, resource: object) {
         switch (resource) {
-            case this.coffee: this.coffee.countCoffee += quant;
-            case this.cacao: this.cacao.countCacao += quant;
-            case this.water: this.water.countWater += quant;
-            case this.milk: this.milk.countMilk += quant;
-            case this.sugar: this.sugar.countSugar += quant;
+            case this.coffee: this.coffee.countCoffee += quant; break
+            case this.cacao: this.cacao.countCacao += quant; break
+            case this.water: this.water.countWater += quant; break
+            case this.milk: this.milk.countMilk += quant; break
+            case this.sugar: this.sugar.countSugar += quant; break
         }
     }
 
@@ -42,6 +42,7 @@ class CMachine {
                 } else {                    
                     return this.isResource(100, 30);
                 };
+            break
             case 2:
                 if (this.cacao.countCacao >= 20 && this.water.countWater >= 100 && this.sugar.countSugar >= 10) {
                     this.cacao.countCacao -= 20;
@@ -50,7 +51,8 @@ class CMachine {
                     return 'Заберите стаканчик с Chocolate';                
                 } else {
                     return this.isResource(100, 0, 20, 10);
-                }
+                };
+            break
             case 3:
                 if (this.cacao.countCacao >= 30 && this.water.countWater >= 100 
                     && this.sugar.countSugar >= 10 && this.milk.countMilk >= 20) {
@@ -61,7 +63,8 @@ class CMachine {
                     return 'Заберите стаканчик с Milk chocolate';                
                 } else {
                     return this.isResource(100, 0, 20, 10, 20);
-                }
+                };
+            break
             case 4:
                 if (this.coffee.countCoffee >= 30 && this.water.countWater >= 100 
                     && this.cacao.countCacao >= 20 && this.sugar.countSugar >= 10 
@@ -74,7 +77,8 @@ class CMachine {
                     return 'Заберите стаканчик с 3 in 1';            
                 } else {
                     return this.isResource(100, 30, 20, 10, 20);
-                }
+                };
+            break
         }
     }
 }
