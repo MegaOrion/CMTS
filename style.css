@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.buttons_add {
+    display: flex;
+    justify-content: space-around;
+}
+
+.add {
+    cursor: pointer;
+    height: 35px;
+    background-color: #aaa;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 10px;
+}
+
+.add:hover {
+    background-color: #fff;
+}
+
+.add:active {
+    border: 1px solid transparent;
+}
+
+h1{
+    color: orangered;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.buttons_create {
+    display: flex;
+    justify-content: space-around;
+}
+
+.create {
+    cursor: pointer;
+    height: 35px;
+    background-color: rgb(30, 152, 223);
+    border: 1px solid rgb(25, 0, 255);
+    outline: none;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.create:hover {
+    background-color: rgb(25, 0, 255);
+}
+
+.create:active {
+    border: 1px solid transparent;
+}
+
+#output {
+    display: block;
+    margin: 50px auto;
+    text-align: center;
+    font-size: 30px;
+}
